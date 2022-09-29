@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class Calculator {
+public class Main {
     private JLabel OutputLbl;
     private JButton NumOneBut;
     private JButton NumTwoBut;
