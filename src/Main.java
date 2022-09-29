@@ -30,6 +30,11 @@ public class Main {
      * Extra Methods to keep Main clean
      */
     private void InitiateCalc() {
+        InitiateNumbers();
+        InitiateSigns();
+    }
+
+    private void InitiateNumbers() {
         Utils.InitiateNumButton(NumZeroBut, "0");
         Utils.InitiateNumButton(NumOneBut, "1");
         Utils.InitiateNumButton(NumTwoBut, "2");
@@ -41,6 +46,9 @@ public class Main {
         Utils.InitiateNumButton(NumEightBut, "8");
         Utils.InitiateNumButton(NumNineBut, "9");
         Utils.InitiateNumButton(NumSepBut, ".");
+    }
+
+    private void InitiateSigns() {
         Utils.InitiateSignButton(SignPlusBut, "+");
         Utils.InitiateSignButton(SignMinBut, "-");
         Utils.InitiateSignButton(SignTimeBut, "x");
