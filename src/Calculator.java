@@ -1,10 +1,10 @@
 import javax.swing.*;
 
 public class Calculator {
+    private JLabel OutputLbl;
     private JButton NumOneBut;
     private JButton NumTwoBut;
     private JButton NumThreeBut;
-    private JLabel OutputLbl;
     private JButton NumFourBut;
     private JButton NumFiveBut;
     private JButton NumSixBut;
