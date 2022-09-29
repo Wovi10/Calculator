@@ -8,7 +8,7 @@ public class Utils {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                calc.addToNumber(value);
+                calc.addNumber(value);
             }
         });
     }

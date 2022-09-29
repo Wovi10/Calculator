@@ -42,5 +42,8 @@ public class Main {
         Utils.InitiateNumButton(NumNineBut, "9");
         Utils.InitiateNumButton(NumSepBut, ".");
         Utils.InitiateSignButton(SignPlusBut, "+");
+        Utils.InitiateSignButton(SignMinBut, "-");
+        Utils.InitiateSignButton(SignTimeBut, "x");
+        Utils.InitiateSignButton(SignDivBut, "/");
     }
 }
