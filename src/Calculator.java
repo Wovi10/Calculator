@@ -28,6 +28,24 @@ public class Calculator {
         updateForm(sign);
     }
 
+    public void calculate() {
+        sanitiseVariables();
+        float variableFloat = Float.parseFloat(variable);
+        float variable2Float = Float.parseFloat(variable2);
+    }
+
+    private void sanitiseVariables() {
+        if (variable.isEmpty()){
+            variable = "0";
+        }
+        if (variable2.isEmpty()){
+            variable2 = "0";
+        }
+        if (sign.isEmpty()){
+            sign = "+";
+        }
+    }
+
     private void updateForm(String textToAdd) {
         String originalText = main.OutputLbl.getText();
         main.OutputLbl.setText(originalText + textToAdd);

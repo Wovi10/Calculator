@@ -21,4 +21,13 @@ public class Utils {
             }
         });
     }
+
+    public static void InitiateEquals(JButton button) {
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calc.calculate();
+            }
+        });
+    }
 }

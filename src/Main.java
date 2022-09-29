@@ -32,6 +32,7 @@ public class Main {
     private void InitiateCalc() {
         InitiateNumbers();
         InitiateSigns();
+        InitiateEquals();
     }
 
     private void InitiateNumbers() {
@@ -53,5 +54,9 @@ public class Main {
         Utils.InitiateSignButton(SignMinBut, "-");
         Utils.InitiateSignButton(SignTimeBut, "x");
         Utils.InitiateSignButton(SignDivBut, "/");
+    }
+
+    private void InitiateEquals() {
+        Utils.InitiateEquals(SignEquBut);
     }
 }
