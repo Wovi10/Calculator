@@ -1,6 +1,10 @@
 import java.util.Objects;
 
 public class Calculator {
+    public static final String PLUS_SIGN = "+";
+    public static final String MINUS_SIGN = "-";
+    public static final String TIMES_SIGN = "x";
+    public static final String DIVIDE_SIGN = "/";
     private String variable = "";
     private String variable2 = "";
     private String sign = "";
@@ -32,6 +36,14 @@ public class Calculator {
         sanitiseVariables();
         float variableFloat = Float.parseFloat(variable);
         float variable2Float = Float.parseFloat(variable2);
+        float result = switch (sign) {
+            case PLUS_SIGN -> variableFloat + variable2Float;
+            case MINUS_SIGN -> variableFloat - variable2Float;
+            case TIMES_SIGN -> variableFloat * variable2Float;
+            case DIVIDE_SIGN -> variableFloat / variable2Float;
+            default -> 0;
+        };
+        showResult(result);
     }
 
     private void sanitiseVariables() {
@@ -49,5 +61,10 @@ public class Calculator {
     private void updateForm(String textToAdd) {
         String originalText = main.OutputLbl.getText();
         main.OutputLbl.setText(originalText + textToAdd);
+    }
+
+    private void showResult(float result) {
+        String textToShow = String.format("%f", result);
+        main.OutputLbl.setText(textToShow);
     }
 }
