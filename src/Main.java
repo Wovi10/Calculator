@@ -37,10 +37,13 @@ public class Main extends JFrame{
     private static String separator = ".";
 
     public Main() {
+        initiateCalculator();
+    }
+
+    private void initiateCalculator() {
         initiateNumButtons();
         initiateSignButtons();
         initiateEquals();
-        InitiateCalc();
     }
 
     private void initiateSignButtons() {
@@ -120,37 +123,6 @@ public class Main extends JFrame{
         utils = new Utils(main);
     }
 
-    /**
-     * Extra Methods to keep Main clean
-     */
-    private void InitiateCalc() {
-        InitiateNumbers();
-        InitiateSigns();
-        InitiateEquals();
-    }
-
-    private void InitiateNumbers() {
-//        Utils utils = new Utils(m);
-        utils.InitiateNumButton(NumZeroBut, "0");
-        utils.InitiateNumButton(NumOneBut, "1");
-        utils.InitiateNumButton(NumTwoBut, "2");
-        utils.InitiateNumButton(NumThreeBut, "3");
-        utils.InitiateNumButton(NumFourBut, "4");
-        utils.InitiateNumButton(NumFiveBut, "5");
-        utils.InitiateNumButton(NumSixBut, "6");
-        utils.InitiateNumButton(NumSevenBut, "7");
-        utils.InitiateNumButton(NumEightBut, "8");
-        utils.InitiateNumButton(NumNineBut, "9");
-        utils.InitiateNumButton(NumSepBut, ".");
-    }
-
-    private void InitiateSigns() {
-        utils.InitiateSignButton(SignPlusBut, "+");
-        utils.InitiateSignButton(SignMinBut, "-");
-        utils.InitiateSignButton(SignTimeBut, "x");
-        utils.InitiateSignButton(SignDivBut, "/");
-    }
-
     private void initiateEquals() {
         SignEquBut.addActionListener(new ActionListener() {
             @Override
@@ -184,5 +156,10 @@ public class Main extends JFrame{
         if (sign.isEmpty()){
             sign = "+";
         }
+    }
+
+    private void showResult(float result) {
+        String textToShow = String.format("%f", result);
+        main.OutputLbl.setText(textToShow);
     }
 }
