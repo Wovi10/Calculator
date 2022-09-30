@@ -26,7 +26,6 @@ public class Main extends JFrame{
     private JButton SignEquBut;
     private JPanel CalculatorPanel;
     private static Main main;
-    private static Utils utils;
     public static final String PLUS_SIGN = "+";
     public static final String MINUS_SIGN = "-";
     public static final String TIMES_SIGN = "x";
@@ -36,6 +35,16 @@ public class Main extends JFrame{
     private static String sign = "";
     private static String separator = ".";
 
+    public static void main(String[] args) {
+        main = new Main();
+        main.setContentPane(main.CalculatorPanel);
+
+        main.setTitle("Calculator");
+        main.setVisible(true);
+        main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        main.setSize(500, 800);
+    }
+
     public Main() {
         initiateCalculator();
     }
@@ -44,27 +53,6 @@ public class Main extends JFrame{
         initiateNumButtons();
         initiateSignButtons();
         initiateEquals();
-    }
-
-    private void initiateSignButtons() {
-        initiateSignButton(SignPlusBut, PLUS_SIGN);
-        initiateSignButton(SignMinBut, MINUS_SIGN);
-        initiateSignButton(SignTimeBut, TIMES_SIGN);
-        initiateSignButton(SignDivBut, DIVIDE_SIGN);
-    }
-
-    private void initiateSignButton(JButton button, String sign) {
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setSign(sign);
-            }
-        });
-    }
-
-    private void setSign(String signToSet) {
-        sign = signToSet;
-        updateForm(sign);
     }
 
     private void initiateNumButtons() {
@@ -112,15 +100,25 @@ public class Main extends JFrame{
         main.OutputLbl.setText(originalText + textToAdd);
     }
 
-    public static void main(String[] args) {
-        main = new Main();
-        main.setContentPane(main.CalculatorPanel);
+    private void initiateSignButtons() {
+        initiateSignButton(SignPlusBut, PLUS_SIGN);
+        initiateSignButton(SignMinBut, MINUS_SIGN);
+        initiateSignButton(SignTimeBut, TIMES_SIGN);
+        initiateSignButton(SignDivBut, DIVIDE_SIGN);
+    }
 
-        main.setTitle("Calculator");
-        main.setVisible(true);
-        main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        main.setSize(500, 800);
-        utils = new Utils(main);
+    private void initiateSignButton(JButton button, String sign) {
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setSign(sign);
+            }
+        });
+    }
+
+    private void setSign(String signToSet) {
+        sign = signToSet;
+        updateForm(sign);
     }
 
     private void initiateEquals() {
