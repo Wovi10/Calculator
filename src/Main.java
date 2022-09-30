@@ -1,62 +1,86 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Main {
+public class Main extends JFrame{
     /**
      * Standard declaration of form elements
      */
     public JLabel OutputLbl;
-    private static JButton NumZeroBut;
-    private static JButton NumOneBut;
-    private static JButton NumTwoBut;
-    private static JButton NumThreeBut;
-    private static JButton NumFourBut;
-    private static JButton NumFiveBut;
-    private static JButton NumSixBut;
-    private static JButton NumSevenBut;
-    private static JButton NumEightBut;
-    private static JButton NumNineBut;
-    private static JButton NumSepBut;
-    private static JButton SignPlusBut;
-    private static JButton SignMinBut;
-    private static JButton SignTimeBut;
-    private static JButton SignDivBut;
-    private static JButton SignEquBut;
+    private JButton NumZeroBut;
+    private JButton NumOneBut;
+    private JButton NumTwoBut;
+    private JButton NumThreeBut;
+    private JButton NumFourBut;
+    private JButton NumFiveBut;
+    private JButton NumSixBut;
+    private JButton NumSevenBut;
+    private JButton NumEightBut;
+    private JButton NumNineBut;
+    private JButton NumSepBut;
+    private JButton SignPlusBut;
+    private JButton SignMinBut;
+    private JButton SignTimeBut;
+    private JButton SignDivBut;
+    private JButton SignEquBut;
+    private JPanel CalculatorPanel;
+    private static Main main;
+    private static Utils utils;
+
+    public Main() {
+        NumZeroBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Calculator.addNumber("0");
+            }
+        });
+
+        InitiateCalc();
+    }
 
     public static void main(String[] args) {
-        InitiateCalc();
+        main = new Main();
+        main.setContentPane(main.CalculatorPanel);
+
+        main.setTitle("Calculator");
+        main.setVisible(true);
+        main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        main.setSize(500, 800);
+        utils = new Utils(main);
     }
 
     /**
      * Extra Methods to keep Main clean
      */
-    private static void InitiateCalc() {
+    private void InitiateCalc() {
         InitiateNumbers();
         InitiateSigns();
         InitiateEquals();
     }
 
-    private static void InitiateNumbers() {
-        Utils.InitiateNumButton(NumZeroBut, "0");
-        Utils.InitiateNumButton(NumOneBut, "1");
-        Utils.InitiateNumButton(NumTwoBut, "2");
-        Utils.InitiateNumButton(NumThreeBut, "3");
-        Utils.InitiateNumButton(NumFourBut, "4");
-        Utils.InitiateNumButton(NumFiveBut, "5");
-        Utils.InitiateNumButton(NumSixBut, "6");
-        Utils.InitiateNumButton(NumSevenBut, "7");
-        Utils.InitiateNumButton(NumEightBut, "8");
-        Utils.InitiateNumButton(NumNineBut, "9");
-        Utils.InitiateNumButton(NumSepBut, ".");
+    private void InitiateNumbers() {
+//        Utils utils = new Utils(m);
+        utils.InitiateNumButton(NumZeroBut, "0");
+        utils.InitiateNumButton(NumOneBut, "1");
+        utils.InitiateNumButton(NumTwoBut, "2");
+        utils.InitiateNumButton(NumThreeBut, "3");
+        utils.InitiateNumButton(NumFourBut, "4");
+        utils.InitiateNumButton(NumFiveBut, "5");
+        utils.InitiateNumButton(NumSixBut, "6");
+        utils.InitiateNumButton(NumSevenBut, "7");
+        utils.InitiateNumButton(NumEightBut, "8");
+        utils.InitiateNumButton(NumNineBut, "9");
+        utils.InitiateNumButton(NumSepBut, ".");
     }
 
-    private static void InitiateSigns() {
-        Utils.InitiateSignButton(SignPlusBut, "+");
-        Utils.InitiateSignButton(SignMinBut, "-");
-        Utils.InitiateSignButton(SignTimeBut, "x");
-        Utils.InitiateSignButton(SignDivBut, "/");
+    private void InitiateSigns() {
+        utils.InitiateSignButton(SignPlusBut, "+");
+        utils.InitiateSignButton(SignMinBut, "-");
+        utils.InitiateSignButton(SignTimeBut, "x");
+        utils.InitiateSignButton(SignDivBut, "/");
     }
 
-    private static void InitiateEquals() {
-        Utils.InitiateEquals(SignEquBut);
+    private void InitiateEquals() {
+        utils.InitiateEquals(SignEquBut);
     }
 }

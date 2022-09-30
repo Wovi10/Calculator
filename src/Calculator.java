@@ -1,16 +1,22 @@
 import java.util.Objects;
 
 public class Calculator {
+
     public static final String PLUS_SIGN = "+";
     public static final String MINUS_SIGN = "-";
     public static final String TIMES_SIGN = "x";
     public static final String DIVIDE_SIGN = "/";
-    private String variable = "";
-    private String variable2 = "";
-    private String sign = "";
-    private String separator = ".";
-    private final Main main = new Main();
-    public void addNumber(String value) {
+    private static String variable = "";
+    private static String variable2 = "";
+    private static String sign = "";
+    private static String separator = ".";
+    private Main main;
+
+    public Calculator(Main main) {
+        this.main = main;
+    }
+
+    public static void addNumber(String value) {
         if (sign.isEmpty()){
             if (variable.isEmpty()){
                 variable = value;
@@ -59,7 +65,7 @@ public class Calculator {
         }
     }
 
-    private void updateForm(String textToAdd) {
+    private static void updateForm(String textToAdd) {
         String originalText = main.OutputLbl.getText();
         main.OutputLbl.setText(originalText + textToAdd);
     }
