@@ -81,25 +81,33 @@ public class Main extends JFrame{
     private void addNumber(String value) {
         System.out.println(variable);
         if (sign.isEmpty()){
+            System.out.println("sign empty");
             if (variable.isEmpty()){
+                System.out.println("variable empty");
                 variable = value;
-            } else if (variable.contains(separator) && !Objects.equals(value, separator)) {
+            } else if (!variable.contains(separator) || !Objects.equals(value, separator)) {
                 variable += value;
             }
-            updateForm(variable);
+//            addNumToForm(variable);
+            updateForm();
         }else {
             if (variable2.isEmpty()){
                 variable2 = value;
             } else if (variable2.contains(separator) && !Objects.equals(value, separator)) {
                 variable2 += value;
             }
-            updateForm(variable2);
+//            addNumToForm(variable2);
+            updateForm();
         }
     }
 
-    private void updateForm(String textToAdd) {
+    private void addNumToForm(String textToAdd) {
         String originalText = main.OutputLbl.getText();
-        main.OutputLbl.setText(originalText + textToAdd);
+        main.OutputLbl.setText(textToAdd);
+    }
+    private void updateForm(){
+        String outputText = String.format("%s %s %s", variable, sign, variable2);
+        main.OutputLbl.setText(outputText);
     }
 
     private void initiateSignButtons() {
@@ -114,13 +122,14 @@ public class Main extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setSign(sign);
+//                updateForm();
             }
         });
     }
 
     private void setSign(String signToSet) {
         sign = signToSet;
-        updateForm(sign);
+        updateForm();
     }
 
     private void initiateEquals() {
@@ -159,7 +168,7 @@ public class Main extends JFrame{
     }
 
     private void showResult(float result) {
-        String textToShow = String.format("%f", result);
+        String textToShow = String.format("%s %s %s = %s", variable, sign, variable2, result);
         main.OutputLbl.setText(textToShow);
     }
 }
