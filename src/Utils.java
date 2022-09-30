@@ -9,14 +9,6 @@ public class Utils {
     }
 
     private static Calculator calc = new Calculator(main);
-    public static void InitiateNumButton(JButton button, String value) {
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                calc.addNumber(value);
-            }
-        });
-    }
 
     public static void InitiateSignButton(JButton button, String sign) {
         button.addActionListener(new ActionListener() {

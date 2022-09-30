@@ -12,6 +12,9 @@ public class Calculator {
     private static String separator = ".";
     private Main main;
 
+    public Calculator() {
+    }
+
     public Calculator(Main main) {
         this.main = main;
     }
