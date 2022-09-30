@@ -44,6 +44,7 @@ public class Calculator {
             default -> 0;
         };
         showResult(result);
+        sign = "";
     }
 
     private void sanitiseVariables() {

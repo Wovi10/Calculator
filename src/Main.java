@@ -5,37 +5,37 @@ public class Main {
      * Standard declaration of form elements
      */
     public JLabel OutputLbl;
-    private JButton NumZeroBut;
-    private JButton NumOneBut;
-    private JButton NumTwoBut;
-    private JButton NumThreeBut;
-    private JButton NumFourBut;
-    private JButton NumFiveBut;
-    private JButton NumSixBut;
-    private JButton NumSevenBut;
-    private JButton NumEightBut;
-    private JButton NumNineBut;
-    private JButton NumSepBut;
-    private JButton SignPlusBut;
-    private JButton SignMinBut;
-    private JButton SignTimeBut;
-    private JButton SignDivBut;
-    private JButton SignEquBut;
+    private static JButton NumZeroBut;
+    private static JButton NumOneBut;
+    private static JButton NumTwoBut;
+    private static JButton NumThreeBut;
+    private static JButton NumFourBut;
+    private static JButton NumFiveBut;
+    private static JButton NumSixBut;
+    private static JButton NumSevenBut;
+    private static JButton NumEightBut;
+    private static JButton NumNineBut;
+    private static JButton NumSepBut;
+    private static JButton SignPlusBut;
+    private static JButton SignMinBut;
+    private static JButton SignTimeBut;
+    private static JButton SignDivBut;
+    private static JButton SignEquBut;
 
-    public Main() {
+    public static void main(String[] args) {
         InitiateCalc();
     }
 
     /**
      * Extra Methods to keep Main clean
      */
-    private void InitiateCalc() {
+    private static void InitiateCalc() {
         InitiateNumbers();
         InitiateSigns();
         InitiateEquals();
     }
 
-    private void InitiateNumbers() {
+    private static void InitiateNumbers() {
         Utils.InitiateNumButton(NumZeroBut, "0");
         Utils.InitiateNumButton(NumOneBut, "1");
         Utils.InitiateNumButton(NumTwoBut, "2");
@@ -49,14 +49,14 @@ public class Main {
         Utils.InitiateNumButton(NumSepBut, ".");
     }
 
-    private void InitiateSigns() {
+    private static void InitiateSigns() {
         Utils.InitiateSignButton(SignPlusBut, "+");
         Utils.InitiateSignButton(SignMinBut, "-");
         Utils.InitiateSignButton(SignTimeBut, "x");
         Utils.InitiateSignButton(SignDivBut, "/");
     }
 
-    private void InitiateEquals() {
+    private static void InitiateEquals() {
         Utils.InitiateEquals(SignEquBut);
     }
 }
