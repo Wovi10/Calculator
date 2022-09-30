@@ -79,20 +79,22 @@ public class Main extends JFrame{
     }
 
     private void addNumber(String value) {
+        System.out.println(variable);
         if (sign.isEmpty()){
             if (variable.isEmpty()){
                 variable = value;
             } else if (variable.contains(separator) && !Objects.equals(value, separator)) {
                 variable += value;
             }
+            updateForm(variable);
         }else {
             if (variable2.isEmpty()){
                 variable2 = value;
             } else if (variable2.contains(separator) && !Objects.equals(value, separator)) {
                 variable2 += value;
             }
+            updateForm(variable2);
         }
-        updateForm(variable);
     }
 
     private void updateForm(String textToAdd) {
