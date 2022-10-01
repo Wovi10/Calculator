@@ -3,12 +3,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class Main extends JFrame{
+public class Main extends JFrame {
     public static final String TITLE = "Calculator";
     public static final int FORM_WIDTH = 500;
     public static final int FORM_HEIGHT = 800;
     public static final String SANATISED_VARIABLE = "0";
     public static final String DEFAULT_EMPTY = "";
+    public static final String PLUS_SIGN = "+";
+    public static final String MINUS_SIGN = "-";
+    public static final String TIMES_SIGN = "x";
+    public static final String DIVIDE_SIGN = "/";
+    private static String variable = DEFAULT_EMPTY;
+    private static String variable2 = DEFAULT_EMPTY;
+    private static String sign = DEFAULT_EMPTY;
+    private static String resultStr = DEFAULT_EMPTY;
+    private static final String separator = ".";
     /**
      * Standard declaration of form elements
      */
@@ -31,15 +40,6 @@ public class Main extends JFrame{
     private JButton SignEquBut;
     private JPanel CalculatorPanel;
     private static Main main;
-    public static final String PLUS_SIGN = "+";
-    public static final String MINUS_SIGN = "-";
-    public static final String TIMES_SIGN = "x";
-    public static final String DIVIDE_SIGN = "/";
-    private static String variable = DEFAULT_EMPTY;
-    private static String variable2 = DEFAULT_EMPTY;
-    private static String sign = DEFAULT_EMPTY;
-    private static String resultStr = DEFAULT_EMPTY;
-    private static final String separator = ".";
 
     public static void main(String[] args) {
         main = new Main();
@@ -85,15 +85,15 @@ public class Main extends JFrame{
 
     private void addNumber(String value) {
         resultStr = DEFAULT_EMPTY;
-        if (sign.isEmpty()){
-            if (variable.isEmpty()){
+        if (sign.isEmpty()) {
+            if (variable.isEmpty()) {
                 variable = value;
             } else if (!variable.contains(separator) || !Objects.equals(value, separator)) {
                 variable += value;
             }
             updateForm();
-        }else {
-            if (variable2.isEmpty()){
+        } else {
+            if (variable2.isEmpty()) {
                 variable2 = value;
             } else if (!variable2.contains(separator) || !Objects.equals(value, separator)) {
                 variable2 += value;
@@ -102,7 +102,7 @@ public class Main extends JFrame{
         }
     }
 
-    private void updateForm(){
+    private void updateForm() {
         String outputText = String.format("%s %s %s", variable, sign, variable2);
         main.OutputLbl.setText(outputText);
     }
@@ -125,7 +125,7 @@ public class Main extends JFrame{
 
     private void setSign(String signToSet) {
         sign = signToSet;
-        if (!resultStr.isEmpty()){
+        if (!resultStr.isEmpty()) {
             variable = resultStr;
         }
         updateForm();
@@ -139,6 +139,7 @@ public class Main extends JFrame{
             }
         });
     }
+
     public void calculate() {
         sanitiseVariables();
         float variableFloat = Float.parseFloat(variable);
@@ -150,30 +151,31 @@ public class Main extends JFrame{
             case DIVIDE_SIGN -> variableFloat / variable2Float;
             default -> 0;
         };
-        showResult(result);
-        prepareNextCalc(result);
+        String resultToShow = new java.text.DecimalFormat("#.#").format(result);
+        showResult(resultToShow);
+        prepareNextCalc(resultToShow);
     }
 
-    private void prepareNextCalc(float result) {
-        resultStr = String.format("%s", result);
+    private void prepareNextCalc(String resultToShow) {
+        resultStr = resultToShow;
         variable = DEFAULT_EMPTY;
         variable2 = DEFAULT_EMPTY;
         sign = DEFAULT_EMPTY;
     }
 
     private void sanitiseVariables() {
-        if (variable.isEmpty()){
+        if (variable.isEmpty()) {
             variable = SANATISED_VARIABLE;
         }
-        if (variable2.isEmpty()){
+        if (variable2.isEmpty()) {
             variable2 = SANATISED_VARIABLE;
         }
-        if (sign.isEmpty()){
+        if (sign.isEmpty()) {
             sign = PLUS_SIGN;
         }
     }
 
-    private void showResult(float result) {
+    private void showResult(String result) {
         String textToShow = String.format("%s %s %s = %s", variable, sign, variable2, result);
         main.OutputLbl.setText(textToShow);
     }
