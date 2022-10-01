@@ -33,7 +33,7 @@ public class Main extends JFrame{
     private static String variable = "";
     private static String variable2 = "";
     private static String sign = "";
-    private static String separator = ".";
+    private static final String separator = ".";
 
     public static void main(String[] args) {
         main = new Main();
@@ -81,14 +81,11 @@ public class Main extends JFrame{
     private void addNumber(String value) {
         System.out.println(variable);
         if (sign.isEmpty()){
-            System.out.println("sign empty");
             if (variable.isEmpty()){
-                System.out.println("variable empty");
                 variable = value;
             } else if (!variable.contains(separator) || !Objects.equals(value, separator)) {
                 variable += value;
             }
-//            addNumToForm(variable);
             updateForm();
         }else {
             if (variable2.isEmpty()){
@@ -96,7 +93,6 @@ public class Main extends JFrame{
             } else if (variable2.contains(separator) && !Objects.equals(value, separator)) {
                 variable2 += value;
             }
-//            addNumToForm(variable2);
             updateForm();
         }
     }
