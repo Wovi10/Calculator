@@ -4,21 +4,21 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class Main extends JFrame {
-    public static final String TITLE = "Calculator";
-    public static final int FORM_WIDTH = 500;
-    public static final int FORM_HEIGHT = 800;
-    public static final String SANATISED_VARIABLE = "0";
-    public static final String DEFAULT_EMPTY = "";
-    public static final String PLUS_SIGN = "+";
-    public static final String MINUS_SIGN = "-";
-    public static final String TIMES_SIGN = "x";
-    public static final String DIVIDE_SIGN = "/";
-    public static final String RESULT_PATTERN = "#.#";
+    private static final String TITLE = "Calculator";
+    private static final int FORM_WIDTH = 500;
+    private static final int FORM_HEIGHT = 800;
+    private static final String DEFAULT_EMPTY = "";
+    private static final String SANATISED_VARIABLE = "0";
+    private static final String PLUS_SIGN = "+";
+    private static final String MINUS_SIGN = "-";
+    private static final String TIMES_SIGN = "x";
+    private static final String DIVIDE_SIGN = "/";
+    private static final String RESULT_PATTERN = "#.#####";
+    private static final String separator = ".";
     private static String variable = DEFAULT_EMPTY;
     private static String variable2 = DEFAULT_EMPTY;
     private static String sign = DEFAULT_EMPTY;
     private static String resultStr = DEFAULT_EMPTY;
-    private static final String separator = ".";
     /**
      * Standard declaration of form elements
      */
@@ -51,7 +51,7 @@ public class Main extends JFrame {
         main.setSize(FORM_WIDTH, FORM_HEIGHT);
     }
 
-    public Main() {
+    private Main() {
         initiateCalculator();
     }
 
@@ -84,20 +84,20 @@ public class Main extends JFrame {
         });
     }
 
-    private void addNumber(String value) {
+    private void addNumber(String pressedValue) {
         resultStr = DEFAULT_EMPTY;
         if (isVarEmpty(sign)) {
             if (isVarEmpty(variable)) {
-                variable = value;
-            } else if (isNoDoubleSep(variable, value)) {
-                variable += value;
+                variable = pressedValue;
+            } else if (isNoDoubleSep(variable, pressedValue)) {
+                variable += pressedValue;
             }
             updateForm();
         } else {
             if (isVarEmpty(variable2)) {
-                variable2 = value;
-            } else if (isNoDoubleSep(variable2, value)) {
-                variable2 += value;
+                variable2 = pressedValue;
+            } else if (isNoDoubleSep(variable2, pressedValue)) {
+                variable2 += pressedValue;
             }
             updateForm();
         }
@@ -126,7 +126,7 @@ public class Main extends JFrame {
 
     private void setSign(String signToSet) {
         sign = signToSet;
-        if (!resultStr.isEmpty()) {
+        if (!isVarEmpty(resultStr)) {
             variable = resultStr;
         }
         updateForm();
@@ -141,7 +141,7 @@ public class Main extends JFrame {
         });
     }
 
-    public void calculate() {
+    private void calculate() {
         sanitiseVariables();
         float variableFloat = Float.parseFloat(variable);
         float variable2Float = Float.parseFloat(variable2);
@@ -158,13 +158,13 @@ public class Main extends JFrame {
     }
 
     private void sanitiseVariables() {
-        if (IS_VAR_EMPTY) {
+        if (isVarEmpty(variable)) {
             variable = SANATISED_VARIABLE;
         }
-        if (IS_VAR2_EMPTY) {
+        if (isVarEmpty(variable2)) {
             variable2 = SANATISED_VARIABLE;
         }
-        if (sign.isEmpty()) {
+        if (isVarEmpty(sign)) {
             sign = PLUS_SIGN;
         }
     }
@@ -181,11 +181,11 @@ public class Main extends JFrame {
         sign = DEFAULT_EMPTY;
     }
 
-    private static boolean isVarEmpty(String variable) {
-        return variable.isEmpty();
+    private static boolean isVarEmpty(String varToCheck) {
+        return varToCheck.isEmpty();
     }
 
-    private static boolean isNoDoubleSep(String varToCheck, String value) {
-        return varToCheck.contains(separator) || !Objects.equals(value, separator);
+    private static boolean isNoDoubleSep(String varToCheck, String pressedValue) {
+        return !varToCheck.contains(separator) || !Objects.equals(pressedValue, separator);
     }
 }
