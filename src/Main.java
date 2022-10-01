@@ -3,7 +3,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class Main extends JFrame{
+public class Main extends JFrame {
+    private static final String TITLE = "Calculator";
+    private static final int FORM_WIDTH = 500;
+    private static final int FORM_HEIGHT = 800;
+    private static final String DEFAULT_EMPTY = "";
+    private static final String SANATISED_VARIABLE = "0";
+    private static final String PLUS_SIGN = "+";
+    private static final String MINUS_SIGN = "-";
+    private static final String TIMES_SIGN = "x";
+    private static final String DIVIDE_SIGN = "/";
+    private static final String RESULT_PATTERN = "#.#####";
+    private static final String separator = ".";
+    private static String variable = DEFAULT_EMPTY;
+    private static String variable2 = DEFAULT_EMPTY;
+    private static String sign = DEFAULT_EMPTY;
+    private static String resultStr = DEFAULT_EMPTY;
     /**
      * Standard declaration of form elements
      */
@@ -26,26 +41,17 @@ public class Main extends JFrame{
     private JButton SignEquBut;
     private JPanel CalculatorPanel;
     private static Main main;
-    public static final String PLUS_SIGN = "+";
-    public static final String MINUS_SIGN = "-";
-    public static final String TIMES_SIGN = "x";
-    public static final String DIVIDE_SIGN = "/";
-    private static String variable = "";
-    private static String variable2 = "";
-    private static String sign = "";
-    private static String separator = ".";
 
     public static void main(String[] args) {
         main = new Main();
         main.setContentPane(main.CalculatorPanel);
-
-        main.setTitle("Calculator");
+        main.setTitle(TITLE);
         main.setVisible(true);
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        main.setSize(500, 800);
+        main.setSize(FORM_WIDTH, FORM_HEIGHT);
     }
 
-    public Main() {
+    private Main() {
         initiateCalculator();
     }
 
@@ -56,79 +62,73 @@ public class Main extends JFrame{
     }
 
     private void initiateNumButtons() {
-        initiateNumButton(NumZeroBut, "0");
-        initiateNumButton(NumOneBut, "1");
-        initiateNumButton(NumTwoBut, "2");
-        initiateNumButton(NumThreeBut, "3");
-        initiateNumButton(NumFourBut, "4");
-        initiateNumButton(NumFiveBut, "5");
-        initiateNumButton(NumSixBut, "6");
-        initiateNumButton(NumSevenBut, "7");
-        initiateNumButton(NumEightBut, "8");
-        initiateNumButton(NumNineBut, "9");
-        initiateNumButton(NumSepBut, ".");
+        initiateNumButton(NumZeroBut);
+        initiateNumButton(NumOneBut);
+        initiateNumButton(NumTwoBut);
+        initiateNumButton(NumThreeBut);
+        initiateNumButton(NumFourBut);
+        initiateNumButton(NumFiveBut);
+        initiateNumButton(NumSixBut);
+        initiateNumButton(NumSevenBut);
+        initiateNumButton(NumEightBut);
+        initiateNumButton(NumNineBut);
+        initiateNumButton(NumSepBut);
     }
 
-    private void initiateNumButton(JButton button, String value) {
+    private void initiateNumButton(JButton button) {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addNumber(value);
+                addNumber(button.getText());
             }
         });
     }
 
-    private void addNumber(String value) {
-        System.out.println(variable);
-        if (sign.isEmpty()){
-            System.out.println("sign empty");
-            if (variable.isEmpty()){
-                System.out.println("variable empty");
-                variable = value;
-            } else if (!variable.contains(separator) || !Objects.equals(value, separator)) {
-                variable += value;
+    private void addNumber(String pressedValue) {
+        resultStr = DEFAULT_EMPTY;
+        if (isVarEmpty(sign)) {
+            if (isVarEmpty(variable)) {
+                variable = pressedValue;
+            } else if (isNoDoubleSep(variable, pressedValue)) {
+                variable += pressedValue;
             }
-//            addNumToForm(variable);
             updateForm();
-        }else {
-            if (variable2.isEmpty()){
-                variable2 = value;
-            } else if (variable2.contains(separator) && !Objects.equals(value, separator)) {
-                variable2 += value;
+        } else {
+            if (isVarEmpty(variable2)) {
+                variable2 = pressedValue;
+            } else if (isNoDoubleSep(variable2, pressedValue)) {
+                variable2 += pressedValue;
             }
-//            addNumToForm(variable2);
             updateForm();
         }
     }
 
-    private void addNumToForm(String textToAdd) {
-        String originalText = main.OutputLbl.getText();
-        main.OutputLbl.setText(textToAdd);
-    }
-    private void updateForm(){
+    private void updateForm() {
         String outputText = String.format("%s %s %s", variable, sign, variable2);
         main.OutputLbl.setText(outputText);
     }
 
     private void initiateSignButtons() {
-        initiateSignButton(SignPlusBut, PLUS_SIGN);
-        initiateSignButton(SignMinBut, MINUS_SIGN);
-        initiateSignButton(SignTimeBut, TIMES_SIGN);
-        initiateSignButton(SignDivBut, DIVIDE_SIGN);
+        initiateSignButton(SignPlusBut);
+        initiateSignButton(SignMinBut);
+        initiateSignButton(SignTimeBut);
+        initiateSignButton(SignDivBut);
     }
 
-    private void initiateSignButton(JButton button, String sign) {
+    private void initiateSignButton(JButton button) {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setSign(sign);
-//                updateForm();
+                setSign(button.getText());
             }
         });
     }
 
     private void setSign(String signToSet) {
         sign = signToSet;
+        if (!isVarEmpty(resultStr)) {
+            variable = resultStr;
+        }
         updateForm();
     }
 
@@ -140,7 +140,8 @@ public class Main extends JFrame{
             }
         });
     }
-    public void calculate() {
+
+    private void calculate() {
         sanitiseVariables();
         float variableFloat = Float.parseFloat(variable);
         float variable2Float = Float.parseFloat(variable2);
@@ -151,24 +152,40 @@ public class Main extends JFrame{
             case DIVIDE_SIGN -> variableFloat / variable2Float;
             default -> 0;
         };
-        showResult(result);
-        sign = "";
+        String resultToShow = new java.text.DecimalFormat(RESULT_PATTERN).format(result);
+        showResult(resultToShow);
+        prepareNextCalc(resultToShow);
     }
 
     private void sanitiseVariables() {
-        if (variable.isEmpty()){
-            variable = "0";
+        if (isVarEmpty(variable)) {
+            variable = SANATISED_VARIABLE;
         }
-        if (variable2.isEmpty()){
-            variable2 = "0";
+        if (isVarEmpty(variable2)) {
+            variable2 = SANATISED_VARIABLE;
         }
-        if (sign.isEmpty()){
-            sign = "+";
+        if (isVarEmpty(sign)) {
+            sign = PLUS_SIGN;
         }
     }
 
-    private void showResult(float result) {
+    private void showResult(String result) {
         String textToShow = String.format("%s %s %s = %s", variable, sign, variable2, result);
         main.OutputLbl.setText(textToShow);
+    }
+
+    private void prepareNextCalc(String resultToShow) {
+        resultStr = resultToShow;
+        variable = DEFAULT_EMPTY;
+        variable2 = DEFAULT_EMPTY;
+        sign = DEFAULT_EMPTY;
+    }
+
+    private static boolean isVarEmpty(String varToCheck) {
+        return varToCheck.isEmpty();
+    }
+
+    private static boolean isNoDoubleSep(String varToCheck, String pressedValue) {
+        return !varToCheck.contains(separator) || !Objects.equals(pressedValue, separator);
     }
 }
