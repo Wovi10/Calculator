@@ -13,6 +13,7 @@ public class Main extends JFrame {
     public static final String MINUS_SIGN = "-";
     public static final String TIMES_SIGN = "x";
     public static final String DIVIDE_SIGN = "/";
+    public static final String RESULT_PATTERN = "#.#";
     private static String variable = DEFAULT_EMPTY;
     private static String variable2 = DEFAULT_EMPTY;
     private static String sign = DEFAULT_EMPTY;
@@ -85,17 +86,17 @@ public class Main extends JFrame {
 
     private void addNumber(String value) {
         resultStr = DEFAULT_EMPTY;
-        if (sign.isEmpty()) {
-            if (variable.isEmpty()) {
+        if (isVarEmpty(sign)) {
+            if (isVarEmpty(variable)) {
                 variable = value;
-            } else if (!variable.contains(separator) || !Objects.equals(value, separator)) {
+            } else if (isNoDoubleSep(variable, value)) {
                 variable += value;
             }
             updateForm();
         } else {
-            if (variable2.isEmpty()) {
+            if (isVarEmpty(variable2)) {
                 variable2 = value;
-            } else if (!variable2.contains(separator) || !Objects.equals(value, separator)) {
+            } else if (isNoDoubleSep(variable2, value)) {
                 variable2 += value;
             }
             updateForm();
@@ -151,23 +152,16 @@ public class Main extends JFrame {
             case DIVIDE_SIGN -> variableFloat / variable2Float;
             default -> 0;
         };
-        String resultToShow = new java.text.DecimalFormat("#.#").format(result);
+        String resultToShow = new java.text.DecimalFormat(RESULT_PATTERN).format(result);
         showResult(resultToShow);
         prepareNextCalc(resultToShow);
     }
 
-    private void prepareNextCalc(String resultToShow) {
-        resultStr = resultToShow;
-        variable = DEFAULT_EMPTY;
-        variable2 = DEFAULT_EMPTY;
-        sign = DEFAULT_EMPTY;
-    }
-
     private void sanitiseVariables() {
-        if (variable.isEmpty()) {
+        if (IS_VAR_EMPTY) {
             variable = SANATISED_VARIABLE;
         }
-        if (variable2.isEmpty()) {
+        if (IS_VAR2_EMPTY) {
             variable2 = SANATISED_VARIABLE;
         }
         if (sign.isEmpty()) {
@@ -178,5 +172,20 @@ public class Main extends JFrame {
     private void showResult(String result) {
         String textToShow = String.format("%s %s %s = %s", variable, sign, variable2, result);
         main.OutputLbl.setText(textToShow);
+    }
+
+    private void prepareNextCalc(String resultToShow) {
+        resultStr = resultToShow;
+        variable = DEFAULT_EMPTY;
+        variable2 = DEFAULT_EMPTY;
+        sign = DEFAULT_EMPTY;
+    }
+
+    private static boolean isVarEmpty(String variable) {
+        return variable.isEmpty();
+    }
+
+    private static boolean isNoDoubleSep(String varToCheck, String value) {
+        return varToCheck.contains(separator) || !Objects.equals(value, separator);
     }
 }
