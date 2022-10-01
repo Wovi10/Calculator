@@ -119,7 +119,7 @@ public class Main extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setSign(SignPlusBut.getText());
+                setSign(button.getText());
             }
         });
     }
