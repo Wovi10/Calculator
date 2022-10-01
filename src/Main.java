@@ -4,6 +4,11 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class Main extends JFrame{
+    public static final String TITLE = "Calculator";
+    public static final int FORM_WIDTH = 500;
+    public static final int FORM_HEIGHT = 800;
+    public static final String SANATISED_VARIABLE = "0";
+    public static final String DEFAULT_EMPTY = "";
     /**
      * Standard declaration of form elements
      */
@@ -30,19 +35,18 @@ public class Main extends JFrame{
     public static final String MINUS_SIGN = "-";
     public static final String TIMES_SIGN = "x";
     public static final String DIVIDE_SIGN = "/";
-    private static String variable = "";
-    private static String variable2 = "";
-    private static String sign = "";
+    private static String variable = DEFAULT_EMPTY;
+    private static String variable2 = DEFAULT_EMPTY;
+    private static String sign = DEFAULT_EMPTY;
     private static final String separator = ".";
 
     public static void main(String[] args) {
         main = new Main();
         main.setContentPane(main.CalculatorPanel);
-
-        main.setTitle("Calculator");
+        main.setTitle(TITLE);
         main.setVisible(true);
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        main.setSize(500, 800);
+        main.setSize(FORM_WIDTH, FORM_HEIGHT);
     }
 
     public Main() {
@@ -56,24 +60,24 @@ public class Main extends JFrame{
     }
 
     private void initiateNumButtons() {
-        initiateNumButton(NumZeroBut, "0");
-        initiateNumButton(NumOneBut, "1");
-        initiateNumButton(NumTwoBut, "2");
-        initiateNumButton(NumThreeBut, "3");
-        initiateNumButton(NumFourBut, "4");
-        initiateNumButton(NumFiveBut, "5");
-        initiateNumButton(NumSixBut, "6");
-        initiateNumButton(NumSevenBut, "7");
-        initiateNumButton(NumEightBut, "8");
-        initiateNumButton(NumNineBut, "9");
-        initiateNumButton(NumSepBut, ".");
+        initiateNumButton(NumZeroBut);
+        initiateNumButton(NumOneBut);
+        initiateNumButton(NumTwoBut);
+        initiateNumButton(NumThreeBut);
+        initiateNumButton(NumFourBut);
+        initiateNumButton(NumFiveBut);
+        initiateNumButton(NumSixBut);
+        initiateNumButton(NumSevenBut);
+        initiateNumButton(NumEightBut);
+        initiateNumButton(NumNineBut);
+        initiateNumButton(NumSepBut);
     }
 
-    private void initiateNumButton(JButton button, String value) {
+    private void initiateNumButton(JButton button) {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addNumber(value);
+                addNumber(button.getText());
             }
         });
     }
@@ -90,35 +94,30 @@ public class Main extends JFrame{
         }else {
             if (variable2.isEmpty()){
                 variable2 = value;
-            } else if (variable2.contains(separator) && !Objects.equals(value, separator)) {
+            } else if (!variable2.contains(separator) || !Objects.equals(value, separator)) {
                 variable2 += value;
             }
             updateForm();
         }
     }
 
-    private void addNumToForm(String textToAdd) {
-        String originalText = main.OutputLbl.getText();
-        main.OutputLbl.setText(textToAdd);
-    }
     private void updateForm(){
         String outputText = String.format("%s %s %s", variable, sign, variable2);
         main.OutputLbl.setText(outputText);
     }
 
     private void initiateSignButtons() {
-        initiateSignButton(SignPlusBut, PLUS_SIGN);
-        initiateSignButton(SignMinBut, MINUS_SIGN);
-        initiateSignButton(SignTimeBut, TIMES_SIGN);
-        initiateSignButton(SignDivBut, DIVIDE_SIGN);
+        initiateSignButton(SignPlusBut);
+        initiateSignButton(SignMinBut);
+        initiateSignButton(SignTimeBut);
+        initiateSignButton(SignDivBut);
     }
 
-    private void initiateSignButton(JButton button, String sign) {
+    private void initiateSignButton(JButton button) {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setSign(sign);
-//                updateForm();
+                setSign(SignPlusBut.getText());
             }
         });
     }
@@ -148,18 +147,23 @@ public class Main extends JFrame{
             default -> 0;
         };
         showResult(result);
-        sign = "";
+        prepareNextCalc();
+        sign = DEFAULT_EMPTY;
+    }
+
+    private void prepareNextCalc() {
+        
     }
 
     private void sanitiseVariables() {
         if (variable.isEmpty()){
-            variable = "0";
+            variable = SANATISED_VARIABLE;
         }
         if (variable2.isEmpty()){
-            variable2 = "0";
+            variable2 = SANATISED_VARIABLE;
         }
         if (sign.isEmpty()){
-            sign = "+";
+            sign = PLUS_SIGN;
         }
     }
 
