@@ -38,6 +38,7 @@ public class Main extends JFrame{
     private static String variable = DEFAULT_EMPTY;
     private static String variable2 = DEFAULT_EMPTY;
     private static String sign = DEFAULT_EMPTY;
+    private static String resultStr = DEFAULT_EMPTY;
     private static final String separator = ".";
 
     public static void main(String[] args) {
@@ -83,7 +84,7 @@ public class Main extends JFrame{
     }
 
     private void addNumber(String value) {
-        System.out.println(variable);
+        resultStr = DEFAULT_EMPTY;
         if (sign.isEmpty()){
             if (variable.isEmpty()){
                 variable = value;
@@ -124,6 +125,9 @@ public class Main extends JFrame{
 
     private void setSign(String signToSet) {
         sign = signToSet;
+        if (!resultStr.isEmpty()){
+            variable = resultStr;
+        }
         updateForm();
     }
 
@@ -147,12 +151,14 @@ public class Main extends JFrame{
             default -> 0;
         };
         showResult(result);
-        prepareNextCalc();
-        sign = DEFAULT_EMPTY;
+        prepareNextCalc(result);
     }
 
-    private void prepareNextCalc() {
-        
+    private void prepareNextCalc(float result) {
+        resultStr = String.format("%s", result);
+        variable = DEFAULT_EMPTY;
+        variable2 = DEFAULT_EMPTY;
+        sign = DEFAULT_EMPTY;
     }
 
     private void sanitiseVariables() {
