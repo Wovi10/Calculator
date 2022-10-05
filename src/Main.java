@@ -40,7 +40,7 @@ public class Main extends JFrame {
     private JButton SignDivBut;
     private JButton SignEquBut;
     private JPanel CalculatorPanel;
-    private JButton ClearBut;
+    private JButton ClearEntryBut;
     private static Main main;
 
     public static void main(String[] args) {
@@ -54,18 +54,13 @@ public class Main extends JFrame {
 
     private Main() {
         initiateCalculator();
-        ClearBut.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
     }
 
     private void initiateCalculator() {
         initiateNumButtons();
         initiateSignButtons();
         initiateEquals();
+        initiateOtherButtons();
     }
 
     private void initiateNumButtons() {
@@ -194,5 +189,18 @@ public class Main extends JFrame {
 
     private static boolean isNoDoubleSep(String varToCheck, String pressedValue) {
         return !varToCheck.contains(separator) || !Objects.equals(pressedValue, separator);
+    }
+
+    private void initiateOtherButtons() {
+        ClearEntryBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ClearEntry();
+            }
+        });
+    }
+
+    private void ClearEntry() {
+
     }
 }
