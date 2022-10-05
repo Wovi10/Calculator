@@ -19,6 +19,7 @@ public class Main extends JFrame {
     private static String variable2 = DEFAULT_EMPTY;
     private static String sign = DEFAULT_EMPTY;
     private static String resultStr = DEFAULT_EMPTY;
+    private static State calculatorState = State.Variable1;
     /**
      * Standard declaration of form elements
      */
@@ -201,6 +202,8 @@ public class Main extends JFrame {
     }
 
     private void ClearEntry() {
-
+        switch (calculatorState){
+            case State.Variable1 -> variable = DEFAULT_EMPTY;
+        }
     }
 }
