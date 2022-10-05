@@ -95,11 +95,17 @@ public class Main extends JFrame {
             } else if (isNoDoubleSep(variable, pressedValue)) {
                 variable += pressedValue;
             }
+            if (!calculatorState.equals(State.Variable1)){
+                changeState();
+            }
         } else {
             if (isVarEmpty(variable2)) {
                 variable2 = pressedValue;
             } else if (isNoDoubleSep(variable2, pressedValue)) {
                 variable2 += pressedValue;
+            }
+            if (!calculatorState.equals(State.Variable2)){
+                changeState();
             }
         }
         updateForm();
@@ -108,7 +114,6 @@ public class Main extends JFrame {
     private void updateForm() {
         String outputText = String.format("%s %s %s", variable, sign, variable2);
         main.OutputLbl.setText(outputText);
-        changeState();
     }
 
     private void changeState() {
@@ -135,6 +140,9 @@ public class Main extends JFrame {
         sign = signToSet;
         if (!isVarEmpty(resultStr)) {
             variable = resultStr;
+        }
+        if (!calculatorState.equals(State.Sign)){
+            changeState();
         }
         updateForm();
     }
