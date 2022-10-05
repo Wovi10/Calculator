@@ -8,7 +8,7 @@ public class Main extends JFrame {
     private static final int FORM_WIDTH = 500;
     private static final int FORM_HEIGHT = 800;
     private static final String DEFAULT_EMPTY = "";
-    private static final String SANATISED_VARIABLE = "0";
+    private static final String SANITISED_VARIABLE = "0";
     private static final String PLUS_SIGN = "+";
     private static final String MINUS_SIGN = "-";
     private static final String TIMES_SIGN = "x";
@@ -159,10 +159,10 @@ public class Main extends JFrame {
 
     private void sanitiseVariables() {
         if (isVarEmpty(variable)) {
-            variable = SANATISED_VARIABLE;
+            variable = SANITISED_VARIABLE;
         }
         if (isVarEmpty(variable2)) {
-            variable2 = SANATISED_VARIABLE;
+            variable2 = SANITISED_VARIABLE;
         }
         if (isVarEmpty(sign)) {
             sign = PLUS_SIGN;
