@@ -225,6 +225,7 @@ public class Main extends JFrame {
         variable = DEFAULT_EMPTY;
         sign = DEFAULT_EMPTY;
         variable2 = DEFAULT_EMPTY;
+        resultStr = DEFAULT_EMPTY;
         calculatorState = State.Variable1;
         updateForm();
     }
@@ -237,5 +238,4 @@ public class Main extends JFrame {
         }
         updateForm();
     }
-
 }
