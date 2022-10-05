@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class Main extends JFrame {
@@ -69,12 +67,7 @@ public class Main extends JFrame {
     }
 
     private void initiateNumButton(JButton button) {
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                addNumber(button.getText());
-            }
-        });
+        button.addActionListener(e -> addNumber(button.getText()));
     }
 
     private void addNumber(String pressedValue) {
@@ -118,12 +111,7 @@ public class Main extends JFrame {
     }
 
     private void initiateSignButton(JButton button) {
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setSign(button.getText());
-            }
-        });
+        button.addActionListener(e -> setSign(button.getText()));
     }
 
     private void setSign(String signToSet) {
@@ -138,12 +126,7 @@ public class Main extends JFrame {
     }
 
     private void initiateEquals() {
-        SignEquBut.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                calculate();
-            }
-        });
+        SignEquBut.addActionListener(e -> calculate());
     }
 
     private void calculate() {
@@ -195,19 +178,9 @@ public class Main extends JFrame {
     }
 
     private void initiateOtherButtons() {
-        ClearEntryBut.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clearEntry();
-            }
-        });
+        ClearEntryBut.addActionListener(e -> clearEntry());
 
-        ClearBut.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clearAll();
-            }
-        });
+        ClearBut.addActionListener(e -> clearAll());
     }
 
     private void clearAll() {
