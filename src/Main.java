@@ -4,10 +4,10 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class Main extends JFrame {
-    private static String variable = CalculatorVariables.DEFAULT_EMPTY;
-    private static String variable2 = CalculatorVariables.DEFAULT_EMPTY;
-    private static String sign = CalculatorVariables.DEFAULT_EMPTY;
-    private static String resultStr = CalculatorVariables.DEFAULT_EMPTY;
+    private static String variable = CalculatorConstants.DEFAULT_EMPTY;
+    private static String variable2 = CalculatorConstants.DEFAULT_EMPTY;
+    private static String sign = CalculatorConstants.DEFAULT_EMPTY;
+    private static String resultStr = CalculatorConstants.DEFAULT_EMPTY;
     private static State calculatorState = State.Variable1;
     /**
      * Standard declaration of form elements
@@ -37,10 +37,10 @@ public class Main extends JFrame {
     public static void main(String[] args) {
         main = new Main();
         main.setContentPane(main.CalculatorPanel);
-        main.setTitle(CalculatorVariables.TITLE);
+        main.setTitle(CalculatorConstants.TITLE);
         main.setVisible(true);
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        main.setSize(CalculatorVariables.FORM_WIDTH, CalculatorVariables.FORM_HEIGHT);
+        main.setSize(CalculatorConstants.FORM_WIDTH, CalculatorConstants.FORM_HEIGHT);
     }
 
     private Main() {
@@ -78,7 +78,7 @@ public class Main extends JFrame {
     }
 
     private void addNumber(String pressedValue) {
-        resultStr = CalculatorVariables.DEFAULT_EMPTY;
+        resultStr = CalculatorConstants.DEFAULT_EMPTY;
         if (isVarEmpty(sign)) {
             if (isVarEmpty(variable)) {
                 variable = pressedValue;
@@ -151,26 +151,26 @@ public class Main extends JFrame {
         float variableFloat = Float.parseFloat(variable);
         float variable2Float = Float.parseFloat(variable2);
         float result = switch (sign) {
-            case CalculatorVariables.PLUS_SIGN -> variableFloat + variable2Float;
-            case CalculatorVariables.MINUS_SIGN -> variableFloat - variable2Float;
-            case CalculatorVariables.TIMES_SIGN -> variableFloat * variable2Float;
-            case CalculatorVariables.DIVIDE_SIGN -> variableFloat / variable2Float;
+            case CalculatorConstants.PLUS_SIGN -> variableFloat + variable2Float;
+            case CalculatorConstants.MINUS_SIGN -> variableFloat - variable2Float;
+            case CalculatorConstants.TIMES_SIGN -> variableFloat * variable2Float;
+            case CalculatorConstants.DIVIDE_SIGN -> variableFloat / variable2Float;
             default -> 0;
         };
-        String resultToShow = new java.text.DecimalFormat(CalculatorVariables.RESULT_PATTERN).format(result);
+        String resultToShow = new java.text.DecimalFormat(CalculatorConstants.RESULT_PATTERN).format(result);
         showResult(resultToShow);
         prepareNextCalc(resultToShow);
     }
 
     private void sanitiseVariables() {
         if (isVarEmpty(variable)) {
-            variable = CalculatorVariables.SANITISED_VARIABLE;
+            variable = CalculatorConstants.SANITISED_VARIABLE;
         }
         if (isVarEmpty(variable2)) {
-            variable2 = CalculatorVariables.SANITISED_VARIABLE;
+            variable2 = CalculatorConstants.SANITISED_VARIABLE;
         }
         if (isVarEmpty(sign)) {
-            sign = CalculatorVariables.PLUS_SIGN;
+            sign = CalculatorConstants.PLUS_SIGN;
         }
     }
 
@@ -181,9 +181,9 @@ public class Main extends JFrame {
 
     private void prepareNextCalc(String resultToShow) {
         resultStr = resultToShow;
-        variable = CalculatorVariables.DEFAULT_EMPTY;
-        variable2 = CalculatorVariables.DEFAULT_EMPTY;
-        sign = CalculatorVariables.DEFAULT_EMPTY;
+        variable = CalculatorConstants.DEFAULT_EMPTY;
+        variable2 = CalculatorConstants.DEFAULT_EMPTY;
+        sign = CalculatorConstants.DEFAULT_EMPTY;
     }
 
     private static boolean isVarEmpty(String varToCheck) {
@@ -191,7 +191,7 @@ public class Main extends JFrame {
     }
 
     private static boolean isNoDoubleSep(String varToCheck, String pressedValue) {
-        return !varToCheck.contains(CalculatorVariables.SEPARATOR) || !Objects.equals(pressedValue, CalculatorVariables.SEPARATOR);
+        return !varToCheck.contains(CalculatorConstants.SEPARATOR) || !Objects.equals(pressedValue, CalculatorConstants.SEPARATOR);
     }
 
     private void initiateOtherButtons() {
@@ -211,19 +211,19 @@ public class Main extends JFrame {
     }
 
     private void clearAll() {
-        variable = CalculatorVariables.DEFAULT_EMPTY;
-        sign = CalculatorVariables.DEFAULT_EMPTY;
-        variable2 = CalculatorVariables.DEFAULT_EMPTY;
-        resultStr = CalculatorVariables.DEFAULT_EMPTY;
+        variable = CalculatorConstants.DEFAULT_EMPTY;
+        sign = CalculatorConstants.DEFAULT_EMPTY;
+        variable2 = CalculatorConstants.DEFAULT_EMPTY;
+        resultStr = CalculatorConstants.DEFAULT_EMPTY;
         calculatorState = State.Variable1;
         updateForm();
     }
 
     private void clearEntry() {
         switch (calculatorState){
-            case Variable1 -> variable = CalculatorVariables.DEFAULT_EMPTY;
-            case Sign -> sign = CalculatorVariables.DEFAULT_EMPTY;
-            case Variable2 -> variable2 = CalculatorVariables.DEFAULT_EMPTY;
+            case Variable1 -> variable = CalculatorConstants.DEFAULT_EMPTY;
+            case Sign -> sign = CalculatorConstants.DEFAULT_EMPTY;
+            case Variable2 -> variable2 = CalculatorConstants.DEFAULT_EMPTY;
         }
         updateForm();
     }

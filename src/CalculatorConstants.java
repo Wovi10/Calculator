@@ -1,4 +1,4 @@
-public class CalculatorVariables {
+public class CalculatorConstants {
     public static final String TITLE = "Calculator";
     public static final int FORM_WIDTH = 500;
     public static final int FORM_HEIGHT = 800;
@@ -10,5 +10,4 @@ public class CalculatorVariables {
     public static final String DIVIDE_SIGN = "/";
     public static final String RESULT_PATTERN = "#.#####";
     public static final String SEPARATOR = ".";
-
 }
