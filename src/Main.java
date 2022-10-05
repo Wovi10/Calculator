@@ -4,9 +4,6 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class Main extends JFrame {
-    private static final String TITLE = "Calculator";
-    private static final int FORM_WIDTH = 500;
-    private static final int FORM_HEIGHT = 800;
     private static final String DEFAULT_EMPTY = "";
     private static final String SANITISED_VARIABLE = "0";
     private static final String PLUS_SIGN = "+";
@@ -48,10 +45,10 @@ public class Main extends JFrame {
     public static void main(String[] args) {
         main = new Main();
         main.setContentPane(main.CalculatorPanel);
-        main.setTitle(TITLE);
+        main.setTitle(CalculatorVariables.TITLE);
         main.setVisible(true);
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        main.setSize(FORM_WIDTH, FORM_HEIGHT);
+        main.setSize(CalculatorVariables.FORM_WIDTH, CalculatorVariables.FORM_HEIGHT);
     }
 
     private Main() {
@@ -89,7 +86,7 @@ public class Main extends JFrame {
     }
 
     private void addNumber(String pressedValue) {
-        resultStr = DEFAULT_EMPTY;
+        resultStr = CalculatorVariables.DEFAULT_EMPTY;
         if (isVarEmpty(sign)) {
             if (isVarEmpty(variable)) {
                 variable = pressedValue;
@@ -192,9 +189,9 @@ public class Main extends JFrame {
 
     private void prepareNextCalc(String resultToShow) {
         resultStr = resultToShow;
-        variable = DEFAULT_EMPTY;
-        variable2 = DEFAULT_EMPTY;
-        sign = DEFAULT_EMPTY;
+        variable = CalculatorVariables.DEFAULT_EMPTY;
+        variable2 = CalculatorVariables.DEFAULT_EMPTY;
+        sign = CalculatorVariables.DEFAULT_EMPTY;
     }
 
     private static boolean isVarEmpty(String varToCheck) {
@@ -222,19 +219,19 @@ public class Main extends JFrame {
     }
 
     private void clearAll() {
-        variable = DEFAULT_EMPTY;
-        sign = DEFAULT_EMPTY;
-        variable2 = DEFAULT_EMPTY;
-        resultStr = DEFAULT_EMPTY;
+        variable = CalculatorVariables.DEFAULT_EMPTY;
+        sign = CalculatorVariables.DEFAULT_EMPTY;
+        variable2 = CalculatorVariables.DEFAULT_EMPTY;
+        resultStr = CalculatorVariables.DEFAULT_EMPTY;
         calculatorState = State.Variable1;
         updateForm();
     }
 
     private void clearEntry() {
         switch (calculatorState){
-            case Variable1 -> variable = DEFAULT_EMPTY;
-            case Sign -> sign = DEFAULT_EMPTY;
-            case Variable2 -> variable2 = DEFAULT_EMPTY;
+            case Variable1 -> variable = CalculatorVariables.DEFAULT_EMPTY;
+            case Sign -> sign = CalculatorVariables.DEFAULT_EMPTY;
+            case Variable2 -> variable2 = CalculatorVariables.DEFAULT_EMPTY;
         }
         updateForm();
     }
