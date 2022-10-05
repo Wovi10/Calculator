@@ -42,6 +42,7 @@ public class Main extends JFrame {
     private JButton SignEquBut;
     private JPanel CalculatorPanel;
     private JButton ClearEntryBut;
+    private JButton ClearBut;
     private static Main main;
 
     public static void main(String[] args) {
@@ -211,6 +212,17 @@ public class Main extends JFrame {
                 clearEntry();
             }
         });
+
+        ClearBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearAll();
+            }
+        });
+    }
+
+    private void clearAll() {
+
     }
 
     private void clearEntry() {
@@ -219,6 +231,7 @@ public class Main extends JFrame {
             case Sign -> sign = DEFAULT_EMPTY;
             case Variable2 -> variable2 = DEFAULT_EMPTY;
         }
+        updateForm();
     }
 
 }
