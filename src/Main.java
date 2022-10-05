@@ -40,6 +40,7 @@ public class Main extends JFrame {
     private JButton SignDivBut;
     private JButton SignEquBut;
     private JPanel CalculatorPanel;
+    private JButton ClearBut;
     private static Main main;
 
     public static void main(String[] args) {
@@ -53,6 +54,12 @@ public class Main extends JFrame {
 
     private Main() {
         initiateCalculator();
+        ClearBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     private void initiateCalculator() {
