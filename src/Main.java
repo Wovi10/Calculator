@@ -203,7 +203,10 @@ public class Main extends JFrame {
 
     private void ClearEntry() {
         switch (calculatorState){
-            case State.Variable1 -> variable = DEFAULT_EMPTY;
+            case Variable1 -> variable = DEFAULT_EMPTY;
+            case Sign -> sign = DEFAULT_EMPTY;
+            case Variable2 -> variable2 = DEFAULT_EMPTY;
         }
     }
+
 }
