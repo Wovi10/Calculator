@@ -222,7 +222,11 @@ public class Main extends JFrame {
     }
 
     private void clearAll() {
-
+        variable = DEFAULT_EMPTY;
+        sign = DEFAULT_EMPTY;
+        variable2 = DEFAULT_EMPTY;
+        calculatorState = State.Variable1;
+        updateForm();
     }
 
     private void clearEntry() {
