@@ -95,20 +95,28 @@ public class Main extends JFrame {
             } else if (isNoDoubleSep(variable, pressedValue)) {
                 variable += pressedValue;
             }
-            updateForm();
         } else {
             if (isVarEmpty(variable2)) {
                 variable2 = pressedValue;
             } else if (isNoDoubleSep(variable2, pressedValue)) {
                 variable2 += pressedValue;
             }
-            updateForm();
+        }
+        updateForm();
+    }
+
+    private void changeState() {
+        switch (calculatorState){
+            case Variable1 -> calculatorState = State.Sign;
+            case Sign -> calculatorState = State.Variable2;
+            case Variable2 -> calculatorState = State.Variable1;
         }
     }
 
     private void updateForm() {
         String outputText = String.format("%s %s %s", variable, sign, variable2);
         main.OutputLbl.setText(outputText);
+        changeState();
     }
 
     private void initiateSignButtons() {
