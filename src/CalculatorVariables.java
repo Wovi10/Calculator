@@ -9,6 +9,6 @@ public class CalculatorVariables {
     public static final String TIMES_SIGN = "x";
     public static final String DIVIDE_SIGN = "/";
     public static final String RESULT_PATTERN = "#.#####";
-    public static final String separator = ".";
+    public static final String SEPARATOR = ".";
 
 }

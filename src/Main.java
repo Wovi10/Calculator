@@ -4,18 +4,10 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class Main extends JFrame {
-    private static final String DEFAULT_EMPTY = "";
-    private static final String SANITISED_VARIABLE = "0";
-    private static final String PLUS_SIGN = "+";
-    private static final String MINUS_SIGN = "-";
-    private static final String TIMES_SIGN = "x";
-    private static final String DIVIDE_SIGN = "/";
-    private static final String RESULT_PATTERN = "#.#####";
-    private static final String separator = ".";
-    private static String variable = DEFAULT_EMPTY;
-    private static String variable2 = DEFAULT_EMPTY;
-    private static String sign = DEFAULT_EMPTY;
-    private static String resultStr = DEFAULT_EMPTY;
+    private static String variable = CalculatorVariables.DEFAULT_EMPTY;
+    private static String variable2 = CalculatorVariables.DEFAULT_EMPTY;
+    private static String sign = CalculatorVariables.DEFAULT_EMPTY;
+    private static String resultStr = CalculatorVariables.DEFAULT_EMPTY;
     private static State calculatorState = State.Variable1;
     /**
      * Standard declaration of form elements
@@ -159,26 +151,26 @@ public class Main extends JFrame {
         float variableFloat = Float.parseFloat(variable);
         float variable2Float = Float.parseFloat(variable2);
         float result = switch (sign) {
-            case PLUS_SIGN -> variableFloat + variable2Float;
-            case MINUS_SIGN -> variableFloat - variable2Float;
-            case TIMES_SIGN -> variableFloat * variable2Float;
-            case DIVIDE_SIGN -> variableFloat / variable2Float;
+            case CalculatorVariables.PLUS_SIGN -> variableFloat + variable2Float;
+            case CalculatorVariables.MINUS_SIGN -> variableFloat - variable2Float;
+            case CalculatorVariables.TIMES_SIGN -> variableFloat * variable2Float;
+            case CalculatorVariables.DIVIDE_SIGN -> variableFloat / variable2Float;
             default -> 0;
         };
-        String resultToShow = new java.text.DecimalFormat(RESULT_PATTERN).format(result);
+        String resultToShow = new java.text.DecimalFormat(CalculatorVariables.RESULT_PATTERN).format(result);
         showResult(resultToShow);
         prepareNextCalc(resultToShow);
     }
 
     private void sanitiseVariables() {
         if (isVarEmpty(variable)) {
-            variable = SANITISED_VARIABLE;
+            variable = CalculatorVariables.SANITISED_VARIABLE;
         }
         if (isVarEmpty(variable2)) {
-            variable2 = SANITISED_VARIABLE;
+            variable2 = CalculatorVariables.SANITISED_VARIABLE;
         }
         if (isVarEmpty(sign)) {
-            sign = PLUS_SIGN;
+            sign = CalculatorVariables.PLUS_SIGN;
         }
     }
 
@@ -199,7 +191,7 @@ public class Main extends JFrame {
     }
 
     private static boolean isNoDoubleSep(String varToCheck, String pressedValue) {
-        return !varToCheck.contains(separator) || !Objects.equals(pressedValue, separator);
+        return !varToCheck.contains(CalculatorVariables.SEPARATOR) || !Objects.equals(pressedValue, CalculatorVariables.SEPARATOR);
     }
 
     private void initiateOtherButtons() {
