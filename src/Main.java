@@ -106,11 +106,7 @@ public class Main extends JFrame {
     }
 
     private void changeState() {
-        switch (calculatorState){
-            case Variable1 -> calculatorState = State.Sign;
-            case Sign -> calculatorState = State.Variable2;
-            case Variable2 -> calculatorState = State.Variable1;
-        }
+        calculatorState = calculatorState.setNext();
     }
 
     private void updateForm() {
