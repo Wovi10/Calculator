@@ -105,14 +105,14 @@ public class Main extends JFrame {
         updateForm();
     }
 
-    private void changeState() {
-        calculatorState = calculatorState.setNext();
-    }
-
     private void updateForm() {
         String outputText = String.format("%s %s %s", variable, sign, variable2);
         main.OutputLbl.setText(outputText);
         changeState();
+    }
+
+    private void changeState() {
+        calculatorState = calculatorState.setNext();
     }
 
     private void initiateSignButtons() {
@@ -200,12 +200,12 @@ public class Main extends JFrame {
         ClearEntryBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ClearEntry();
+                clearEntry();
             }
         });
     }
 
-    private void ClearEntry() {
+    private void clearEntry() {
         switch (calculatorState){
             case Variable1 -> variable = DEFAULT_EMPTY;
             case Sign -> sign = DEFAULT_EMPTY;
