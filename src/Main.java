@@ -216,7 +216,9 @@ public class Main extends JFrame {
         switch (calculatorState){
             case Variable1:
                 if (!variable.isEmpty()){
+                    System.out.println(variable);
                     variable = variable.substring(0, variable.length()-1);
+                    System.out.println(variable);
                 }
                 break;
             case Sign:
