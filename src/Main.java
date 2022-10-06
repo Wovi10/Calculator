@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class Main extends JFrame {
@@ -30,6 +32,7 @@ public class Main extends JFrame {
     private JPanel CalculatorPanel;
     private JButton ClearEntryBut;
     private JButton ClearBut;
+    private JButton BackspaceBut;
     private static Main main;
 
     public static void main(String[] args) {
@@ -79,7 +82,7 @@ public class Main extends JFrame {
                 variable += pressedValue;
             }
             if (!calculatorState.equals(State.Variable1)){
-                changeState();
+                changeState(State.Variable1);
             }
         } else {
             if (isVarEmpty(variable2)) {
@@ -88,7 +91,7 @@ public class Main extends JFrame {
                 variable2 += pressedValue;
             }
             if (!calculatorState.equals(State.Variable2)){
-                changeState();
+                changeState(State.Variable2);
             }
         }
         updateForm();
@@ -99,8 +102,9 @@ public class Main extends JFrame {
         main.OutputLbl.setText(outputText);
     }
 
-    private void changeState() {
-        calculatorState = calculatorState.setNext();
+    private void changeState(State stateToSet) {
+        calculatorState = stateToSet;
+        System.out.println(calculatorState);
     }
 
     private void initiateSignButtons() {
@@ -120,7 +124,7 @@ public class Main extends JFrame {
             variable = resultStr;
         }
         if (!calculatorState.equals(State.Sign)){
-            changeState();
+            changeState(State.Sign);
         }
         updateForm();
     }
@@ -181,6 +185,8 @@ public class Main extends JFrame {
         ClearEntryBut.addActionListener(e -> clearEntry());
 
         ClearBut.addActionListener(e -> clearAll());
+
+        BackspaceBut.addActionListener(e -> deleteLastTyped());
     }
 
     private void clearAll() {
@@ -197,6 +203,34 @@ public class Main extends JFrame {
             case Variable1 -> variable = CalculatorConstants.DEFAULT_EMPTY;
             case Sign -> sign = CalculatorConstants.DEFAULT_EMPTY;
             case Variable2 -> variable2 = CalculatorConstants.DEFAULT_EMPTY;
+        }
+        updateForm();
+    }
+
+    private void deleteLastTyped() {
+        switch (calculatorState){
+            case Variable1 -> variable = variable.substring(0, variable.length()-1);
+            case Sign -> sign = CalculatorConstants.DEFAULT_EMPTY;
+            case Variable2 -> variable2 = variable2.substring(0, variable2.length()-1);
+        }
+        switch (calculatorState){
+            case Variable1:
+                if (!variable.isEmpty()){
+                    variable = variable.substring(0, variable.length()-1);
+                }
+                break;
+            case Sign:
+                sign = CalculatorConstants.DEFAULT_EMPTY;
+                calculatorState = State.Variable1;
+                break;
+            case Variable2:
+                if (!variable2.isEmpty()){
+                    variable2 = variable2.substring(0, variable2.length()-1);
+                }else{
+                    calculatorState = State.Sign;
+                    deleteLastTyped();
+                }
+                break;
         }
         updateForm();
     }
