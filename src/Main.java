@@ -209,16 +209,9 @@ public class Main extends JFrame {
 
     private void deleteLastTyped() {
         switch (calculatorState){
-            case Variable1 -> variable = variable.substring(0, variable.length()-1);
-            case Sign -> sign = CalculatorConstants.DEFAULT_EMPTY;
-            case Variable2 -> variable2 = variable2.substring(0, variable2.length()-1);
-        }
-        switch (calculatorState){
             case Variable1:
                 if (!variable.isEmpty()){
-                    System.out.println(variable);
                     variable = variable.substring(0, variable.length()-1);
-                    System.out.println(variable);
                 }
                 break;
             case Sign:
